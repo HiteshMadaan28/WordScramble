@@ -9,13 +9,19 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        List{
+            Section("This is the main Section")
+            {
+                Text("Hello is this Hitesh")
+            }
+            Section("Dynamic Section")
+            {
+                ForEach(0..<100)
+                {
+                    Text("Hii \($0)")
+                }
+            }
         }
-        .padding()
     }
 }
 
