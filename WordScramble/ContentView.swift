@@ -16,7 +16,20 @@ struct ContentView: View {
             }
             Section("Dynamic Section")
             {
-                ForEach(0..<100)
+                ForEach(0..<3)
+                {
+                    Text("Hii \($0)")
+                }
+            }
+        }
+        List(0..<2){_ in
+            Section("This is the main Section")
+            {
+                Text("Hello is this Hitesh")
+            }
+            Section("Dynamic Section")
+            {
+                ForEach(0..<3)
                 {
                     Text("Hii \($0)")
                 }
