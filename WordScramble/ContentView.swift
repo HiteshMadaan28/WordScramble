@@ -30,6 +30,12 @@ struct ContentView: View {
             
         }
     }
+    
+    func testBundle(){
+        if let fileURL=Bundle.main.url(forResource: "somefile", withExtension: "txt"){
+            
+        }
+    }
 }
 
 #Preview {
