@@ -31,10 +31,24 @@ struct ContentView: View {
         }
     }
     
+    func testString(){
+        let input="""
+        a
+        b
+        c
+        """
+        let letters=input.components(separatedBy: "\n")
+        let letter=letters.randomElement()
+    }
+    
     func testBundle(){
         if let fileURL=Bundle.main.url(forResource: "somefile", withExtension: "txt"){
             //Bundle
+            if let fileContents = try? String(contentsOf: fileURL) {
+                // we loaded the file into a string!
+            }
         }
+        
     }
 }
 
