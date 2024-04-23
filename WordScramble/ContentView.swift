@@ -8,27 +8,58 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var usedWords = [String]()
+    @State private var rootWord = ""
+    @State private var newWord = ""
+    
     var people=["Hello","This","is","goood"]
     var body: some View {
-        List{
-            Section("This is the main Section")
-            {
-                Text("Hello is this Hitesh")
-            }
-            Section("Dynamic Section")
-            {
-                ForEach(0..<3)
-                {
-                    Text("Hii \($0)")
+        NavigationStack {
+                List {
+                    Section {
+                        TextField("Enter your word", text: $newWord)
+                    }
+
+                    Section {
+                        ForEach(usedWords, id: \.self) { word in
+                            Text(word)
+                        }
+                    }
                 }
+                .navigationTitle(rootWord)
             }
-        }
-        List(people,id: \.self){
-            
-            Text("Hii \($0)")
-                
-            
-        }
+//        List{
+//            Section("This is the main Section")
+//            {
+//                Text("Hello is this Hitesh")
+//            }
+//            Section("Dynamic Section")
+//            {
+//                ForEach(0..<3)
+//                {
+//                    Text("Hii \($0)")
+//                }
+//            }
+//        }
+//        List(people,id: \.self){
+//            
+//            Text("Hii \($0)")
+//                
+//            
+//        }
+    }
+    func addNewWord() {
+        // lowercase and trim the word, to make sure we don't add duplicate words with case differences
+        let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
+
+        // exit if the remaining string is empty
+        guard answer.count > 0 else { return }
+
+        // extra validation to come
+
+        usedWords.insert(answer, at: 0)
+        newWord = ""
     }
     
     func testString(){
