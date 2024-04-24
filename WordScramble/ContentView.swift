@@ -19,6 +19,7 @@ struct ContentView: View {
                 List {
                     Section {
                         TextField("Enter your word", text: $newWord)
+                            .textInputAutocapitalization(.never)
                     }
 
                     Section {
@@ -28,6 +29,8 @@ struct ContentView: View {
                     }
                 }
                 .navigationTitle(rootWord)
+                .onSubmit(addNewWord)
+                
             }
 //        List{
 //            Section("This is the main Section")
