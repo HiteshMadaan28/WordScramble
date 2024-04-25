@@ -32,25 +32,6 @@ struct ContentView: View {
                 .onSubmit(addNewWord)
                 
             }
-//        List{
-//            Section("This is the main Section")
-//            {
-//                Text("Hello is this Hitesh")
-//            }
-//            Section("Dynamic Section")
-//            {
-//                ForEach(0..<3)
-//                {
-//                    Text("Hii \($0)")
-//                }
-//            }
-//        }
-//        List(people,id: \.self){
-//            
-//            Text("Hii \($0)")
-//                
-//            
-//        }
     }
     func addNewWord() {
         // lowercase and trim the word, to make sure we don't add duplicate words with case differences
