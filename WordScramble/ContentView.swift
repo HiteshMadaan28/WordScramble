@@ -3,6 +3,10 @@
 //  WordScramble
 //
 //  Created by Hitesh Madaan on 16/04/24.
+/*
+ LinearGradient(colors: [.blue , .pink], startPoint: .top, endPoint: .bottom)
+     .ignoresSafeArea()
+ */
 //
 
 import SwiftUI
@@ -20,26 +24,43 @@ struct ContentView: View {
     var people=["Hello","This","is","goood"]
     var body: some View {
         NavigationStack {
-                List {
-                    Section {
-                        TextField("Enter your word", text: $newWord)
-                            .textInputAutocapitalization(.never)
-                    }
-
-                    Section {
-                        ForEach(usedWords, id: \.self) { word in
-                            Text(word)
+            ZStack{
+                LinearGradient(colors: [.white , .cyan], startPoint: .top, endPoint: .bottom)
+                    .ignoresSafeArea()
+                
+                VStack{
+                    List{
+                        Section{
+                            TextField("Enter your word", text: $newWord)
+                                .textInputAutocapitalization(.never)
+                        }
+                        
+                        Section{
+                            ForEach(usedWords, id: \.self) { word in
+                                Text(word)
+                            
                         }
                     }
+                        
+                    }
+                    
+                    
                 }
-                .navigationTitle(rootWord)
-                .onSubmit(addNewWord)
-                .onAppear(perform: startGame)
-                .alert(errorTitle, isPresented: $showingError) {
-                } message: {
-                    Text(errorMessage)
-                }
+                .padding(10)
+                .frame(width: 300,height: 500)
+                .background(.regularMaterial)
+                .clipShape(.rect(cornerRadius: 20))
+                
             }
+            .navigationTitle(rootWord)
+            .onSubmit(addNewWord)
+            .onAppear(perform: startGame)
+            .alert(errorTitle, isPresented: $showingError) {
+            } message: {
+                Text(errorMessage)
+            }
+            
+        }
     }
     func startGame() {
         // 1. Find the URL for start.txt in our app bundle
