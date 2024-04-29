@@ -16,6 +16,8 @@ struct ContentView: View {
     @State private var usedWords = [String]()
     @State private var rootWord = ""
     @State private var newWord = ""
+    @State private var Wcount = 0
+    @State private var Lcount = 0
     
     @State private var errorTitle = ""
     @State private var errorMessage = ""
@@ -39,18 +41,29 @@ struct ContentView: View {
                             ForEach(usedWords, id: \.self) { word in
                                 Text(word)
                             
+                            }
                         }
-                    }
                         
                     }
                     
-                    
+                    VStack{
+                        Text("Word Count : \(Wcount) , Letter Count : \(Lcount) ")
+                    }
+                
                 }
                 .padding(10)
-                .frame(width: 300,height: 500)
+                .frame(width: 320,height: 500)
                 .background(.regularMaterial)
                 .clipShape(.rect(cornerRadius: 20))
                 
+                
+                
+            }
+            .toolbar{
+                Button("Start Game")
+                {
+                    startGame()
+                }
             }
             .navigationTitle(rootWord)
             .onSubmit(addNewWord)
@@ -61,7 +74,9 @@ struct ContentView: View {
             }
             
         }
+        
     }
+    
     func startGame() {
         // 1. Find the URL for start.txt in our app bundle
         if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
@@ -86,7 +101,10 @@ struct ContentView: View {
         let answer = newWord.lowercased().trimmingCharacters(in: .whitespacesAndNewlines)
 
         // exit if the remaining string is empty
-        guard answer.count > 0 else { return }
+        guard answer.count > 3 else {
+            wordError(title: "Word is Too Short", message: "Think more")
+            return
+        }
 
         guard isOriginal(word: answer) else {
             wordError(title: "Word used already", message: "Be more original")
@@ -102,10 +120,21 @@ struct ContentView: View {
             wordError(title: "Word not recognized", message: "You can't just make them up, you know!")
             return
         }
-
+        
+        updateValues(answer)
+        Wcount += 1
         usedWords.insert(answer, at: 0)
+        
         newWord = ""
     }
+    
+    func updateValues(_ word:String){
+        for i in word{
+            Lcount += 1
+        }
+        
+    }
+        
     
     func testString(){
         let input="""
